@@ -33,6 +33,7 @@ import android.util.AndroidException;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+import android.view.Gravity;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.util.ArrayUtils;
@@ -1682,11 +1683,19 @@ public final class LineageSettings {
          */
         public static final String GESTURE_ANYWHERE_ENABLED = "gesture_anywhere_enabled";
 
+        /** @hide */
+        public static final Validator GESTURE_ANYWHERE_ENABLED_VALIDATOR =
+                sBooleanValidator;
+
         /**
          * Position of gesture anywhere trigger.  Value is either Gravity.LEFT or Gravity.RIGHT
          * @hide
          */
         public static final String GESTURE_ANYWHERE_POSITION = "gesture_anywhere_position";
+
+        /** @hide */
+        public static final Validator GESTURE_ANYWHERE_POSITION_VALIDATOR =
+                new InclusiveIntegerRangeValidator(Gravity.LEFT, Gravity.RIGHT);
 
         /**
          * Last time gestures were altered.
@@ -1695,11 +1704,19 @@ public final class LineageSettings {
          */
         public static final String GESTURE_ANYWHERE_CHANGED = "gesture_anywhere_changed";
 
+        /** @hide */
+        public static final Validator GESTURE_ANYWHERE_CHANGED_VALIDATOR =
+                new InclusiveLongRangeValidator(Long.MIN_VALUE, Long.MAX_VALUE);
+
         /**
          * Width of the gesture anywhere trigger.
          * @hide
          */
         public static final String GESTURE_ANYWHERE_TRIGGER_WIDTH = "gesture_anywhere_trigger_width";
+
+        /** @hide */
+        public static final Validator GESTURE_ANYWHERE_TRIGGER_WIDTH_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 64);
 
         /**
          * Position of gesture anywhere trigger.
@@ -1707,11 +1724,19 @@ public final class LineageSettings {
          */
         public static final String GESTURE_ANYWHERE_TRIGGER_TOP = "gesture_anywhere_trigger_top";
 
+        /** @hide */
+        public static final Validator GESTURE_ANYWHERE_TRIGGER_TOP_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 99);
+
         /**
          * Height of the gesture anywhere trigger.
          * @hide
          */
         public static final String GESTURE_ANYWHERE_TRIGGER_HEIGHT = "gesture_anywhere_trigger_height";
+
+        /** @hide */
+        public static final Validator GESTURE_ANYWHERE_TRIGGER_HEIGHT_VALIDATOR =
+                new InclusiveIntegerRangeValidator(0, 100);
 
         /**
          * Whether to display the gesture anywhere trigger region or not.
@@ -1719,6 +1744,10 @@ public final class LineageSettings {
          * @hide
          */
         public static final String GESTURE_ANYWHERE_SHOW_TRIGGER = "gesture_anywhere_show_trigger";
+
+        /** @hide */
+        public static final Validator GESTURE_ANYWHERE_SHOW_TRIGGER_VALIDATOR =
+                sBooleanValidator;
 
         /**
          * Whether to show the alarm clock icon in the status bar.
@@ -2407,6 +2436,17 @@ public final class LineageSettings {
                     ENABLE_TASKBAR_VALIDATOR);
             VALIDATORS.put(__MAGICAL_TEST_PASSING_ENABLER,
                     __MAGICAL_TEST_PASSING_ENABLER_VALIDATOR);
+            VALIDATORS.put(GESTURE_ANYWHERE_CHANGED, GESTURE_ANYWHERE_CHANGED_VALIDATOR);
+            VALIDATORS.put(GESTURE_ANYWHERE_ENABLED, GESTURE_ANYWHERE_ENABLED_VALIDATOR);
+            VALIDATORS.put(GESTURE_ANYWHERE_POSITION, GESTURE_ANYWHERE_POSITION_VALIDATOR);
+            VALIDATORS.put(GESTURE_ANYWHERE_SHOW_TRIGGER,
+                           GESTURE_ANYWHERE_SHOW_TRIGGER_VALIDATOR);
+            VALIDATORS.put(GESTURE_ANYWHERE_TRIGGER_HEIGHT,
+                           GESTURE_ANYWHERE_TRIGGER_HEIGHT_VALIDATOR);
+            VALIDATORS.put(GESTURE_ANYWHERE_TRIGGER_TOP,
+                           GESTURE_ANYWHERE_TRIGGER_TOP_VALIDATOR);
+            VALIDATORS.put(GESTURE_ANYWHERE_TRIGGER_WIDTH,
+                           GESTURE_ANYWHERE_TRIGGER_WIDTH_VALIDATOR);
         };
         // endregion
     }
