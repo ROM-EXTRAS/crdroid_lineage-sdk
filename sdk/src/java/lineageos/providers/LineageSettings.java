@@ -428,6 +428,26 @@ public final class LineageSettings {
         }
     }
 
+    private static final class InclusiveLongRangeValidator implements Validator {
+        private final long mMin;
+        private final long mMax;
+
+        public InclusiveLongRangeValidator(long min, long max) {
+            mMin = min;
+            mMax = max;
+        }
+
+        @Override
+        public boolean validate(String value) {
+            try {
+                final long longValue = Long.parseLong(value);
+                return longValue >= mMin && longValue <= mMax;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+    }
+
     private static final class InclusiveFloatRangeValidator implements Validator {
         private final float mMin;
         private final float mMax;
